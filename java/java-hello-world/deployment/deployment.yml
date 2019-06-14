@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-hello-world
+  labels:
+    app: java-hello-world
+spec:
+  containers:
+  - name: java
+    image: registry.ng.bluemix.net/datashield-core/java-hello-world
+    ports:
+    - containerPort: 80
+  restartPolicy: OnFailure

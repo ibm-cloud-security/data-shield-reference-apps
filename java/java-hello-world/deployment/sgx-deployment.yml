@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-hello-world-sgx
+  labels:
+    app: java-hello-world-sgx
+spec:
+  containers:
+  - name: java
+    image: registry.ng.bluemix.net/datashield-core/java-hello-world-sgx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /dev/isgx
+      name: isgx
+    - mountPath: /dev/gsgx
+      name: gsgx
+    - mountPath: /var/run/aesmd/aesm.socket
+      name: aesm-socket
+    env:
+    - name: NODE_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: NODE_AGENT_BASE_URL
+      value: http://$(NODE_IP):9092/v1
+  volumes:
+  - name: isgx
+    hostPath:
+      path: /dev/isgx
+      type: CharDevice
+  - name: gsgx
+    hostPath:
+      path: /dev/gsgx
+      type: CharDevice
+  - name: aesm-socket
+    hostPath:
+      path: /var/run/aesmd/aesm.socket
+      type: Socket
+  restartPolicy: OnFailure

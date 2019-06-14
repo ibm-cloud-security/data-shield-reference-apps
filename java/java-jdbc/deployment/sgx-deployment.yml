@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-jdbc-sgx
+  labels:
+    app: java-jdbc-sgx
+spec:
+  containers:
+  - name: mysql
+    image: mysql:5.6
+    ports:
+    - name: mysql
+      containerPort: 3306
+      hostPort: 3306
+      protocol: TCP
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+  - name: java
+    image: registry.ng.bluemix.net/datashield-core/java-jdbc-sgx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - mountPath: /dev/isgx
+      name: isgx
+    - mountPath: /dev/gsgx
+      name: gsgx
+    - mountPath: /var/run/aesmd/aesm.socket
+      name: aesm-socket
+    env:
+    - name: NODE_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: NODE_AGENT_BASE_URL
+      value: http://$(NODE_IP):9092/v1
+    - name: TRANSACTIONS
+      value: "2000"
+    - name: DB_URL
+      value: jdbc:mysql://localhost:3306?allowPublicKeyRetrieval=false
+    - name: DB_USER
+      value: root
+    - name: DB_PASSWORD
+      value: password
+    - name: DB_DRIVER
+      value: com.mysql.jdbc.Driver
+  volumes:
+  - name: isgx
+    hostPath:
+      path: /dev/isgx
+      type: CharDevice
+  - name: gsgx
+    hostPath:
+      path: /dev/gsgx
+      type: CharDevice
+  - name: aesm-socket
+    hostPath:
+      path: /var/run/aesmd/aesm.socket
+      type: Socket
+  restartPolicy: OnFailure

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-jdbc
+  labels:
+    app: java-jdbc
+spec:
+  containers:
+  - name: mysql
+    image: mysql:5.6
+    ports:
+    - name: mysql
+      containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+  - name: java
+    image: registry.ng.bluemix.net/datashield-core/java-jdbc
+    ports:
+    - containerPort: 80
+    env:
+    - name: TRANSACTIONS
+      value: "2000"
+    - name: DB_URL
+      value: jdbc:mysql://localhost:3306?allowPublicKeyRetrieval=false
+    - name: DB_USER
+      value: root
+    - name: DB_PASSWORD
+      value: password
+    - name: DB_DRIVER
+      value: com.mysql.jdbc.Driver
+  restartPolicy: OnFailure

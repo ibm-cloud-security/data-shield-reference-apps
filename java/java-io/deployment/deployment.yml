@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-io
+  labels:
+    app: java-io
+spec:
+  containers:
+  - name: java
+    image: registry.ng.bluemix.net/datashield-core/java-io
+    ports:
+    - containerPort: 80
+    env:
+    - name: KB_SIZE
+      value: "5000"
+  restartPolicy: OnFailure
