@@ -1,0 +1,71 @@
+.option {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option .sectionContainer {
+    height: 200px;
+    min-width: 280px;
+    position: relative;
+}
+
+.option .imageContainer,
+.option .overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.option .overlay {
+    z-index: 0;
+    background-color: black;
+}
+
+.option .imageContainer:hover {
+    opacity: 0.5;
+}
+
+#oneTimeDonationThumbnail {
+    background: url("../../../Images/oneTimeDonationThumbnail.png") center center / cover no-repeat;
+}
+
+#monthlyDonorThumbnail {
+    background: url("../../../Images/monthlyDonorThumbnail.png") center center / cover no-repeat;
+}
+
+.option .image {
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.option .caption {
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+    z-index: 1;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    background-color: var(--caption-color);
+    padding: 10px;
+    text-align: center;
+}
+
+.option p {
+    font-size: 18px;
+    font-weight: 300;
+    padding-left: 10%;
+}

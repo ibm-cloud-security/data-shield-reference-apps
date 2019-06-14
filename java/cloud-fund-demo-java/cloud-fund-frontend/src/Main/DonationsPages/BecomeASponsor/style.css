@@ -1,0 +1,8 @@
+.donationsPage .becomeASponsor {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.donationsPage .becomeASponsorImage {
+    background: url("../../../Images/sponsor.jpg") center center / cover no-repeat;
+}

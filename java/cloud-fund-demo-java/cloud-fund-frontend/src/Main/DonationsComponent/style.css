@@ -1,0 +1,104 @@
+.donationsPage {
+    display: flex;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+.donationsPage .decorationBar {
+    background-color: rgb(229, 229, 244);
+    min-height: 100vh;
+    flex: 1 1 5%;
+    min-width: 50px;
+}
+
+.donationsPage .changingComponent {
+    flex: 5 1 30%;
+    min-width: 300px;
+    background-color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.donationsPage .image {
+    flex: 1 1 65%;
+    min-height: 100vh;
+    z-index: 0;
+    position: relative;
+}
+
+.donationsPage .image .caption {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+.donationsPage h1 {
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--nav-color);
+}
+
+.donationsPage p,
+.donationsPage button,
+.donationsPage .input {
+    font-size: 18px;
+}
+
+.donationsPage p,
+.donationsPage .input {
+    font-weight: 400;
+    color: black;
+}
+
+.donationsPage button {
+    width: 100%;
+    background-color: var(--nav-color);
+    color: white;
+    height: 80px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 45px;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.donationsPage button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.donationsPage .input {
+    margin-bottom: 10px;
+}
+
+.donationsPage .donationChoices {
+    margin-top: 35px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.donationsPage .choice {
+    display: flex;
+    flex: 0 0 0;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.donationsPage .choice:hover {
+    opacity: 0.5;
+}
+
+.donationsPage .choice:hover {
+    cursor: pointer;
+}
+
+.donationsPage .errorMessage {
+    color: red;
+}

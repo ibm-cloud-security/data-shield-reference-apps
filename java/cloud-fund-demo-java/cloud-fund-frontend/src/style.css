@@ -1,0 +1,19 @@
+:root {
+  --nav-color: rgb(0, 32, 151);
+  --caption-color: rgb(43, 64, 197);
+}
+
+* {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+body {
+    background-color: white;
+    margin: 0;
+}

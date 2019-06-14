@@ -1,0 +1,7 @@
+.donationsPage .donate {
+    padding-top: 30px;
+}
+
+.donationsPage .donateImage {
+    background: url("../../../Images/donate.jpg") center center / cover no-repeat;
+}

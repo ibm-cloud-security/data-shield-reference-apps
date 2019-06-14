@@ -1,0 +1,46 @@
+.managePage .manageProfile tr {
+    border-bottom: 2px solid rgb(199, 199, 199);
+}
+
+.managePage .manageProfile tr.tableHeader {
+    border-bottom: 0;
+}
+
+.managePage .manageProfile td.buttonCell {
+    padding: 15px 10px;
+}
+
+.managePage .manageProfile .tableHeader,
+.managePage .manageProfile .tableHeader th {
+    background-color: rgb(242, 242, 249);
+}
+
+.managePage .manageProfile button {
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 300;
+}
+
+.managePage .manageProfile button.blue {
+    background-color: var(--nav-color);
+}
+
+.managePage .manageProfile button.red {
+    background-color: rgb(223, 0, 31);
+}
+
+.managePage .manageProfile button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.managePage .errorMessage {
+    font-size: 18px;
+    color: red;
+    margin-top: 40px;
+    margin-bottom: -10px;
+}

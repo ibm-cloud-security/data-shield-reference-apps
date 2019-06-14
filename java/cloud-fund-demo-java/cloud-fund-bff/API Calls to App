@@ -1,0 +1,22 @@
+sponsor
+    -- POST to become a donor
+
+donate
+    -- POST to make a donation
+    -- donor GET for donations belonging to the donor -- retrieve the following info (manage donations page)
+            - type (one-time/monthly)
+            - amount
+            - date/time
+    -- admin GET for all donations -- retrieve the following info
+            - type (one-time/monthly)
+            - amount
+            - date/time
+            - location?
+    -- DELETE to stop donation (manage donations page)
+
+authentication
+    --some endpoint that tells the front end that the user is authorized or not
+
+Questions:
+    - What does the "send invoice" button do on the manage donations page?
+    - For App ID, are we allowing Facebook, Google, and SAML login? Cloud Directory only?

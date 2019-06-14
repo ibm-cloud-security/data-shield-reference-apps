@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+spec:
+  containers:
+  - name: mariadb
+    image: icr.io/ibm/datashield-mariadb:161
+    ports:
+    - containerPort: 3306
+      hostPort: 3306
+      name: mariadb
+      protocol: TCP
+    env:
+    - name: MARIADB_ROOT_PASSWORD
+      value: password
+    - name: MARIADB_DATABASE
+      value: transactions_db
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    - name: NODE_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP
+    - name: NODE_AGENT_BASE_URL
+      value: http://$(NODE_IP):9092/v1
+    volumeMounts:
+    - mountPath: /dev/isgx
+      name: isgx
+    - mountPath: /dev/gsgx
+      name: gsgx
+    - mountPath: /var/run/aesmd/aesm.socket
+      name: aesm-socket
+  volumes:
+  - name: isgx
+    hostPath:
+      path: /dev/isgx
+      type: CharDevice
+  - name: gsgx
+    hostPath:
+      path: /dev/gsgx
+      type: CharDevice
+  - name: aesm-socket
+    hostPath:
+      path: /var/run/aesmd/aesm.socket
+      type: Socket
