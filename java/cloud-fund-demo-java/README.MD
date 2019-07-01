@@ -107,6 +107,16 @@ _Make sure you have yq installed._
 _Make sure your App ID instance has the proper ingress URL defined as redirect URL, for example `https://<cluster_name>.<region>.containers.appdomain.cloud/*`. 
 This can be found at the App ID instance configuration, under `Manage Identity Providers` -> `Authentication Settings` -> `Add web redirect URLs`._
 
+## How to use the converted Data Shield version of Cloud Fund?
+
+1. After properly installing Cloud fund (see `Steps to Install`), the backend image has to be properly converted. 
+Refer to https://cloud.ibm.com/docs/services/data-shield?topic=data-shield-convert on how to convert an image.
+Remember to use the proper registry name of the backend image to convert `<registry_path>/cloud-fund-backend`.
+
+2. After converting, we need to re-deploy the cloud-fund-backend pod. To do so, just run `./setup/scripts/use_sgx_backend.sh`.
+
+3. Once the `cloud-fund-backend` pod is in `running` state, then the application is ready to be used.
+
 ## What does the `setup.sh` script run? (All scripts found under `./setup/scripts`)
 
 1. Exports cluster configuration: `export_cluster_config.sh`
