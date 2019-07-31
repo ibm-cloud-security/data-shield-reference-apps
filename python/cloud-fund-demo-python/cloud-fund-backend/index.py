@@ -6,6 +6,7 @@ import json
 import ast
 import imp
 import os
+import time
 from pymongo import MongoClient
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
@@ -80,7 +81,7 @@ def fetch_transactions():
     """
        Function to fetch the transactions.
        """
-
+    
     logger.info("fetch_transactions():GET")
     logger.debug(request.query_string)
 
@@ -143,6 +144,8 @@ def create_transaction():
     try:
         # Create new transaction (TODO: validate user input)
         logger.info("create_transaction(): POST")
+        startTime = time.time()
+        logger.info("Start time:"+str(startTime))
         try:
             logger.info(json.dumps(request.get_json()))
             body = ast.literal_eval(json.dumps(request.get_json()))
@@ -161,6 +164,8 @@ def create_transaction():
             # Return list of Id of the newly created item
             return jsonify([str(v) for v in record_created]), 201
         else:
+            endTime = time.time()
+            logger.info("End time:"+str(endTime))
             # Return Id of the newly created item
             return jsonify(str(record_created)), 201
     except Exception as e:
@@ -177,7 +182,8 @@ def store_card():
     try:
         # Create new transaction
         logger.info("store_card():POST")
-
+        startTime = time.time()
+        logger.info("Start time:"+str(startTime))
 
         try:
             card_info = request.get_json()
@@ -223,6 +229,9 @@ def store_card():
             "date": date,
             "encrypted_card_info":encrypted_card_info
             })
+
+            endTime = time.time()
+            logger.info("End time:"+str(endTime))
 
             # Prepare the response
             if isinstance(record_created, list):
@@ -355,5 +364,5 @@ def getAccessToken():
     return data['access_token']
 
 if __name__ == "__main__":
-    #app.run(host="0.0.0.0", port=int("8500"))
-    app.run(host="0.0.0.0", port=int("8500"), debug=True)
+    app.run(host="0.0.0.0", port=int("8500"))
+    #app.run(host="0.0.0.0", port=int("8500"), debug=True)
