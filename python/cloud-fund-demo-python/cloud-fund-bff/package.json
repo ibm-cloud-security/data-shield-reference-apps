@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": ">=0.18.1",
     "bluemix-appid": "^3.0.6",
     "body-parser": "^1.18.3",
     "cfenv": "^1.1.0",
