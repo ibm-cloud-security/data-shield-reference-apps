@@ -1,0 +1,40 @@
+.managePage {
+    display: flex;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+.managePage h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--nav-color);
+    text-align: left;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.managePage .decorationBar {
+    background-color: rgb(229, 229, 244);
+    min-height: 100vh;
+    flex: 1 1 5%;
+    min-width: 50px;
+}
+
+.managePage .manageProfile,
+.managePage .admin {
+    flex: 5 1 95%;
+    padding-left: 5%;
+    text-align: left;
+    padding-top: 25px;
+}
+
+.managePage table {
+    border-collapse: collapse;
+}
+
+.managePage th,
+.managePage td {
+    padding: 20px 40px;
+    font-size: 18px;
+    font-weight: 400;
+}

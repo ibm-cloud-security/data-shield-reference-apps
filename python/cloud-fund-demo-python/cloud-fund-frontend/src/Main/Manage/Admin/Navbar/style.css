@@ -1,0 +1,59 @@
+:root {
+    --admin-navbar-color: rgb(0, 159, 50);
+}
+
+.adminNavbar {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    height: 65px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: var(--admin-navbar-color);
+    padding-top: 7.5px;
+}
+
+.adminNavbar .left,
+.adminNavbar .right {
+    width: 50%;
+}
+
+.adminNavbar .left {
+    color: white;
+    text-align: left;
+    padding-left: 10%;
+    margin: 0;
+    font-weight: 200;
+    font-size: 36px;
+    letter-spacing: -1.1px;
+}
+
+.adminNavbar .right {
+    padding-right: 10%;
+    margin: 0;
+    text-align: right;
+}
+
+.adminNavbar .right * {
+    color: white;
+    font-weight: 200;
+    font-size: 22px;
+    margin: 0;
+    margin-left: 12.5px;
+    position: relative;
+    top: 14px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.adminNavbar .right h1:hover,
+.adminNavbar .right a:hover {
+    border-bottom: 1.5px solid white;
+    cursor: pointer;
+}

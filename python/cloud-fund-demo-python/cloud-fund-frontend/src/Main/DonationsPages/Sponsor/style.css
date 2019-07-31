@@ -1,0 +1,7 @@
+.donationsPage .sponsor {
+    padding-top: 30px;
+}
+
+.donationsPage .sponsorImage {
+    background: url("../../../Images/sponsor.jpg") center center / cover no-repeat;
+}

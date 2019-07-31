@@ -1,0 +1,37 @@
+apiVersion: "v1"
+kind: Pod
+metadata:
+  name: cloud-fund-bff
+  labels:
+    app: cloud-fund-bff
+spec:
+  containers:
+    - name: cloud-fund-bff
+      env:
+      - name: backend_url
+        valueFrom:
+          secretKeyRef:
+            name: cloud-fund-environment-secrets
+            key: backend_url
+      - name: bff_url
+        valueFrom:
+          secretKeyRef:
+            name: cloud-fund-environment-secrets
+            key: bff_url
+      - name: frontend_url
+        valueFrom:
+          secretKeyRef:
+            name: cloud-fund-environment-secrets
+            key: frontend_url
+      image: registry.ng.bluemix.net/cloud-fund-python/cloud-fund-bff
+      ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+      volumeMounts:
+        - name: secret-volume
+          mountPath: /etc/secret-volume
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: cloud-fund-environment-secrets

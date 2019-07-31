@@ -1,0 +1,11 @@
+Docker build . -t my-python-app
+docker tag my-python-app registry.ng.bluemix.net/karna/my-python-app
+docker push registry.ng.bluemix.net/karna/my-python-app
+
+#kubectl run -it curl --image radial/busyboxplus:curl --restart=Never
+#curl -k -H 'Content-Type: application/json' -d '{"inputImageName": "registry.eu-de.bluemix.net/karna/my-python-app", "outputImageName": "registry.eu-de.bluemix.net/karna/my-python-app-sgx“}' https://datashield-enclaveos-converter.default.svc.cluster.local/v1/convert-image
+
+#curl -k -H 'Content-Type: application/json' -d '{"inputImageName": "registry.eu-de.bluemix.net/karna/my-python-app", "outputImageName": "registry.eu-de.bluemix.net/karna/my-python-app-sgx"}' https://149.81.126.248:31800/v1/convert-image
+
+kubectl apply -f my-python-app-sgx.yml
+kubectl apply -f my-python-app-sgx-nodeport-service.yaml

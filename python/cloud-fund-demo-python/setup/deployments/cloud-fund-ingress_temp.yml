@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cloud-fund-ingress
+  annotations:
+    ingress.bluemix.net/redirect-to-https: "True"
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - backend:
+          serviceName: cloud-fund-frontend-service
+          servicePort: 3000
+        path: /
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /auth
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /ibm
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /donate
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /transactions
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /sponsor
+      - backend:
+          serviceName: cloud-fund-bff-service
+          servicePort: 8000
+        path: /sponsors
+  tls:
+  - hosts:
+    -
+    secretName:
