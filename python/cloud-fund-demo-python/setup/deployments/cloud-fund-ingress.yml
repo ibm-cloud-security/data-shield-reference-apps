@@ -6,7 +6,7 @@ metadata:
     ingress.bluemix.net/redirect-to-https: 'True'
 spec:
   rules:
-  - host: 
+  - host: data-shield-test3.us-south.containers.appdomain.cloud
     http:
       paths:
       - backend:
@@ -39,5 +39,5 @@ spec:
         path: /sponsors
   tls:
   - hosts:
-    - 
-    secretName: 
+    - data-shield-test3.us-south.containers.appdomain.cloud
+    secretName: data-shield-test3

@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: cloud-fund-backend
-    image: registry.ng.bluemix.net/cloud-fund-python/cloud-fund-backend-sgx
+    image: us.icr.io/cloud-fund-python/cloud-fund-backend-sgx
     env:
     - name: SECRET_USERNAME
       valueFrom:
@@ -30,6 +30,21 @@ spec:
         secretKeyRef:
           name: cloud-fund-environment-secrets
           key: db_name
+    - name: API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: cloud-fund-environment-secrets
+          key: API_KEY
+    - name: KP_INSTANCE_ID
+      valueFrom:
+        secretKeyRef:
+          name: cloud-fund-environment-secrets
+          key: kp_instance_id
+    - name: CRK_ID
+      valueFrom:
+        secretKeyRef:
+          name: cloud-fund-environment-secrets
+          key: crk_id
     - name: NODE_IP
       valueFrom:
         fieldRef:
@@ -43,6 +58,8 @@ spec:
       name: gsgx
     - mountPath: /var/run/aesmd/aesm.socket
       name: aesm-socket
+    - name: secret-volume
+      mountPath: /etc/secret-volume
   volumes:
   - name: isgx
     hostPath:
@@ -56,3 +73,6 @@ spec:
     hostPath:
       path: /var/run/aesmd/aesm.socket
       type: Socket
+  - name: secret-volume
+    secret:
+      secretName: cloud-fund-environment-secrets

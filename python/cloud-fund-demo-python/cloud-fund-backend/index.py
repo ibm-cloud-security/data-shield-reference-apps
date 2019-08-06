@@ -18,8 +18,8 @@ app = Flask(__name__)
 
 #Setting logger
 logger = logging.getLogger('cloud_fund_app')
-logger.setLevel(logging.DEBUG)
-#logger.setLevel(logging.INFO)
+#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 fh = logging.FileHandler("cloud_fund.log")
 fh.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
@@ -33,17 +33,24 @@ logger.addHandler(ch)
 logger.info("")
 logger.info("************* Starting execution ****************")
 logger.info("Reading environment variables.")
-DATABASE = MongoClient()[os.environ.get('DB_NAME')] # DB_NAME
+#DATABASE = MongoClient()[os.environ.get('DB_NAME')] # DB_NAME
+DATABASE = MongoClient()[str(open('/etc/secret-volume/db_name', 'r').read())] # DB_NAME
 logger.debug(DATABASE)
-username = os.environ.get('SECRET_USERNAME')
+#username = os.environ.get('SECRET_USERNAME')
+username = str(open('/etc/secret-volume/username', 'r').read())
 logger.debug("User: "+username)
-password = os.environ.get('SECRET_PASSWORD')
-dbconnection = os.environ.get('SECRET_DBCONN')
+#password = os.environ.get('SECRET_PASSWORD')
+password = str(open('/etc/secret-volume/password', 'r').read())
+#dbconnection = os.environ.get('SECRET_DBCONN')
+dbconnection = str(open('/etc/secret-volume/dbconn', 'r').read())
 logger.debug("DB Connection: "+dbconnection)
-apikey = os.environ.get('API_KEY')
-kp_instance_id = os.environ.get('KP_INSTANCE_ID')
+#apikey = os.environ.get('API_KEY')
+apikey = str(open('/etc/secret-volume/API_KEY', 'r').read())
+#kp_instance_id = os.environ.get('KP_INSTANCE_ID')
+kp_instance_id = str(open('/etc/secret-volume/kp_instance_id', 'r').read())
 logger.debug("Key Protect Instance: "+kp_instance_id)
-crk_id = os.environ.get('CRK_ID')
+#crk_id = os.environ.get('CRK_ID')
+crk_id = str(open('/etc/secret-volume/crk_id', 'r').read())
 logger.debug("Crypto Key: "+crk_id)
 IAM_URL = "https://iam.bluemix.net/oidc/token"
 logger.debug("IAM URL: "+IAM_URL)
@@ -54,7 +61,8 @@ client = MongoClient(uri)
 logger.debug(client)
 
 # Select the database
-db = client[os.environ.get('DB_NAME')]
+#db = client[os.environ.get('DB_NAME')]
+db = client[str(open('/etc/secret-volume/db_name', 'r').read())]
 # Select the collection
 collection = db.transactions
 cards = db.cards
@@ -81,7 +89,7 @@ def fetch_transactions():
     """
        Function to fetch the transactions.
        """
-    
+
     logger.info("fetch_transactions():GET")
     logger.debug(request.query_string)
 
@@ -147,7 +155,6 @@ def create_transaction():
         startTime = time.time()
         logger.info("Start time:"+str(startTime))
         try:
-            logger.info(json.dumps(request.get_json()))
             body = ast.literal_eval(json.dumps(request.get_json()))
         except Exception as e:
             # Bad request as request body is not available
@@ -366,3 +373,4 @@ def getAccessToken():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int("8500"))
     #app.run(host="0.0.0.0", port=int("8500"), debug=True)
+

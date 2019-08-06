@@ -18,7 +18,7 @@ spec:
           secretKeyRef:
             name: cloud-fund-environment-secrets
             key: app_id_sign_in
-      image: registry.ng.bluemix.net/cloud-fund-python/cloud-fund-frontend
+      image: us.icr.io/cloud-fund-python/cloud-fund-frontend
       ports:
         - name: http
           containerPort: 3000
