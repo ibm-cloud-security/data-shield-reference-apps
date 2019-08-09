@@ -1,32 +1,31 @@
-# Account API KEY
-export RAW_API_KEY=''
+# IBM Cloud login account API KEY
+#export RAW_API_KEY='gz4HWHvRyHEvyT8zyx8NvCzM8K55il_k10Z1dGXGSGms'
+#export RAW_API_KEY='mAU6DhZGnauxRxR_r_8uBBqq7TWA92IKEJp6_cLM3zdA'
 
+# IBM Cloud account and registry where we want to push images to
+export ACCOUNT_API_KEY=''
+export ACCOUNT_REGION=''
+#Account needs to have pull/push access to this container registry. Deployment files need to be updated with this path.
+export CONTAINER_REGISTRY_PATH=''
 
 # SGX cluster where we want to deploy
-export CLUSTER_API_KEY=''
+export CLUSTER_API_KEY="${ACCOUNT_API_KEY}"
 export CLUSTER_RESOURCE_GROUP=''
 export CLUSTER_REGION=''
 export CLUSTER_NAME=''
-export CLUSTER_INGRESS="${CLUSTER_NAME}.${CLUSTER_REGION}.containers.appdomain.cloud"
+export CLUSTER_INGRESS="cloud-fund.${CLUSTER_NAME}.${CLUSTER_REGION}.containers.appdomain.cloud"
 
 # Key Protect values
 export KEY_PROTECT_INSTANCE=""
 export KEY_PROTECT_MANAGEMENT_URL=""
 export KEY_NAME=""
 
-#MongoDB values
+#DBaaS values
 export RAW_DB_CONN=''
 export RAW_DB_PASSWORD=''
 export RAW_DB_USERNAME=''
 export RAW_DB_NAME=''
 export ENCODED_CERT=''
-
-# Account and registry where we want to push images
-export ACCOUNT_API_KEY=''
-export ACCOUNT_RESOURCE_GROUP=''
-export ACCOUNT_REGION=''
-#Account needs to have pull/push access to this container registry
-export CONTAINER_REGISTRY_PATH=''
 
 # App ID configuration
 export APP_ID_CLIENT_ID=""
