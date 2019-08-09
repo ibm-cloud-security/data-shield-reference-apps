@@ -1,6 +1,3 @@
-# IBM Cloud login account API KEY
-#export RAW_API_KEY='gz4HWHvRyHEvyT8zyx8NvCzM8K55il_k10Z1dGXGSGms'
-#export RAW_API_KEY='mAU6DhZGnauxRxR_r_8uBBqq7TWA92IKEJp6_cLM3zdA'
 
 # IBM Cloud account and registry where we want to push images to
 export ACCOUNT_API_KEY=''
