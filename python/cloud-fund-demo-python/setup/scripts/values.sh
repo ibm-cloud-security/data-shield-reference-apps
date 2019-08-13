@@ -1,4 +1,3 @@
-
 # IBM Cloud account and registry where we want to push images to
 export ACCOUNT_API_KEY=''
 export ACCOUNT_REGION=''
@@ -15,7 +14,7 @@ export CLUSTER_INGRESS="cloud-fund.${CLUSTER_NAME}.${CLUSTER_REGION}.containers.
 # Key Protect values
 export KEY_PROTECT_INSTANCE=""
 export KEY_PROTECT_MANAGEMENT_URL=""
-export KEY_NAME=""
+export KEY_NAME="cloud-fund-key"
 
 #DBaaS values
 export RAW_DB_CONN=''
@@ -37,3 +36,44 @@ export RAW_APP_ID_SIGN_UP_URL="https://${APP_ID_REGION}.appid.cloud.ibm.com/oaut
 export RAW_BACKEND_URL='http://cloud-fund-backend-service:8500'
 export RAW_BFF_URL="https://${CLUSTER_INGRESS}"
 export RAW_FRONTEND_URL="https://${CLUSTER_INGRESS}"
+
+
+
+
+### Cert Manager implementation ###
+
+## In addition, Cert manager can be used with this application. For that, we would need to do the following steps:
+
+# 1. Create Certificate Manager instance
+# ibmcloud resource service-instance-create "${resource_group}_certs" cloudcerts free $region -g $resource_group
+
+# 2. Getting instance id, which is basically the entire crn
+# export cert_manager_instance_id=$(ibmcloud resource service-instance '${resource_group}_certs' --output json | jq -r .[0].crn)
+
+# 3. URL Parsing crn value
+# export cert_manager_instance_id2=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.argv[1]))"  "$cert_manager_instance_id")
+
+# 4. Call to create payload.json
+# python3 "create_payload_from_pem_and_key.py"
+
+# 5. Uploading certificate for frontend
+#export crn=$(curl -X POST -H "Content-Type: application/json" -H "authorization: $iam_token" -d @cloudfund.json https://us-south.certificate-manager.cloud.ibm.com/api/v3/${cert_manager_instance_id2}/certificates/import | jq -r ._id)
+
+# 6. Uploading certificate for bff
+#export crn2=$(curl -X POST -H "Content-Type: application/json" -H "authorization: $iam_token" -d @bff.cloudfund.json https://us-south.certificate-manager.cloud.ibm.com/api/v3/${cert_manager_instance_id2}/certificates/import | jq -r ._id)
+
+
+## Creating alb secret
+# https://cloud.ibm.com/docs/containers?topic=containers-ingress
+
+# 1. Login to ibmcloud
+
+# 2. Export cluster configuration
+
+# 3. Create secret for frontend certificate
+# ibmcloud ks alb-cert-deploy --secret-name ${alb_secret_name} --cluster ${cluster} --cert-crn ${crn}
+
+#4. Creating secret for bff frontend certificate
+# ibmcloud ks alb-cert-deploy --secret-name ${alb_secret_name_bff} --cluster ${cluster} --cert-crn ${crn2}
+
+
