@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: cloud-fund-backend
-    image: us.icr.io/cloud-fund/cloud-fund-backend-sgx
+    image: us.icr.io/cloud-fund-python/cloud-fund-backend-sgx
     env:
     - name: SECRET_USERNAME
       valueFrom:

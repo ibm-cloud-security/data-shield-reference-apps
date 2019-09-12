@@ -23,7 +23,7 @@ spec:
           secretKeyRef:
             name: cloud-fund-environment-secrets
             key: frontend_url
-      image: us.icr.io/cloud-fund/cloud-fund-bff
+      image: us.icr.io/cloud-fund-python/cloud-fund-bff
       ports:
         - name: http
           containerPort: 8000
