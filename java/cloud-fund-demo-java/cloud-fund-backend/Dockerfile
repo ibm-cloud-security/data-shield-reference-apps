@@ -1,4 +1,5 @@
 FROM adoptopenjdk/openjdk8-openj9:latest
+ENV MALLOC_ARENA_MAX=1
 COPY . /
 WORKDIR /
 RUN ./mvnw clean package
