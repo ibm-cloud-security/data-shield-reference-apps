@@ -19,7 +19,7 @@ spec:
     - name: MYSQL_DATABASE
       value: transactions_db
   - name: java
-    image: registry.ng.bluemix.net/datashield-core/cloud-fund-backend-sgx
+    image: us.icr.io/datashield-core/cloud-fund-backend-sgx
     ports:
     - containerPort: 8080
     volumeMounts:
