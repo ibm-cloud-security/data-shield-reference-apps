@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: python-flask-client-ingress
+  annotations:
+    ingress.bluemix.net/redirect-to-https: 'True'
+spec:
+  rules:
+  - host: client.data-shield-ga-test.us-south.containers.appdomain.cloud
+    http:
+      paths:
+      - backend:
+          serviceName: python-flask-client-service-sgx
+          servicePort: 5001
+        path: /
+      - backend:
+          serviceName: python-flask-client-service-sgx
+          servicePort: 5001
+        path: /flaskpost
+  tls:
+  - hosts:
+    - client.data-shield-ga-test.us-south.containers.appdomain.cloud
+    secretName: data-shield-ga-test

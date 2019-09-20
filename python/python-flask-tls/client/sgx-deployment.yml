@@ -1,0 +1,40 @@
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: python-flask-client-sgx
+   labels:
+     app: python-flask-client-sgx
+ spec:
+   containers:
+   - name: python-flask-client-sgx
+     image: <registry>/python-flask-client-sgx
+     volumeMounts:
+     - mountPath: /dev/isgx
+       name: isgx
+     - mountPath: /dev/gsgx
+       name: gsgx
+     - mountPath: /var/run/aesmd/aesm.socket
+       name: aesm-socket
+     ports:
+     - containerPort: 8093
+       name: http
+       protocol: TCP
+     env:
+     - name: NODE_IP
+       valueFrom:
+         fieldRef:
+           fieldPath: status.hostIP
+     - name: NODE_AGENT_BASE_URL
+       value: http://$(NODE_IP):9092/v1
+     - name: ENCLAVEOS_LOG_LEVEL
+       value: debug
+   volumes:
+   - name: isgx
+     hostPath:
+       path: /dev/isgx
+   - name: gsgx
+     hostPath:
+       path: /dev/gsgx
+   - name: aesm-socket
+     hostPath:
+       path: /var/run/aesmd/aesm.socket
