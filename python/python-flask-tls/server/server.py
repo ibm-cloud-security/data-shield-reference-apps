@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from werkzeug import serving
 import logging
 import socket
 from socket import AF_INET, SOCK_STREAM, SO_REUSEADDR, SOL_SOCKET, SHUT_RDWR
@@ -38,5 +39,8 @@ def token():
         logger.error(e)
     return token
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5002, ssl_context=('flask-server.crt', 'flask-server.key'))
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.verify_mode = ssl.CERT_REQUIRED
+context.load_verify_locations("ca.crt")
+context.load_cert_chain("flask-server.crt", "flask-server.key")
+serving.run_simple("0.0.0.0", 5002, app, ssl_context=context)

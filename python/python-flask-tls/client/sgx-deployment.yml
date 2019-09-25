@@ -7,7 +7,7 @@
  spec:
    containers:
    - name: python-flask-client-sgx
-     image: <registry>/python-flask-client-sgx
+     image: us.icr.io/datashield-core/python-flask-client-sgx
      volumeMounts:
      - mountPath: /dev/isgx
        name: isgx
