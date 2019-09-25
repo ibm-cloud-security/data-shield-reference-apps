@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: python-flask-server-sgx
-    image: CONTAINER_REGISTRY_PATH/datashield-core/python-flask-server-sgx
+    image: CONTAINER_REGISTRY_PATH/python-flask-server-sgx
     volumeMounts:
     - mountPath: /dev/isgx
       name: isgx
