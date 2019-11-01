@@ -41,6 +41,6 @@ def token():
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.verify_mode = ssl.CERT_REQUIRED
-context.load_verify_locations("ca.crt")
+context.load_verify_locations("ca.pem")
 context.load_cert_chain("flask-server.crt", "flask-server.key")
 serving.run_simple("0.0.0.0", 5002, app, ssl_context=context)

@@ -5,7 +5,5 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 EXPOSE 5002
-ADD em-ca.crt /usr/local/share/ca-certificates/em-ca.crt
-RUN update-ca-certificates
 ENTRYPOINT ["python"]
 CMD ["server.py"]
