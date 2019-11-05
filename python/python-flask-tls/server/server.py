@@ -22,8 +22,8 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 @app.route("/")
-def hello():
-    return "Hello World"
+def ping():
+    return "Contacted server"
 
 @app.route('/token', methods=['POST'])
 def token():

@@ -1,6 +1,7 @@
 import requests 
 import logging
 from flask import Flask
+from flask import request
 app = Flask(__name__)
 
 logger = logging.getLogger('python_tls_app')
@@ -15,11 +16,14 @@ ch.setFormatter(formatter)
 logger.addHandler(fh)
 logger.addHandler(ch)
 
-@app.route("/request")
-def request():
+@app.route("/request", methods=['GET', 'POST'])
+def request_token():
     URL = "https://python-flask-server-service-sgx:5002/token"
-    
-    data = {'name':'test_name'}
+
+    if request.method == 'GET':
+        data = {'name':'test_name'}
+    else:
+        data = {'name': request.get_json()['name']}
 
     output = ""
     try:
