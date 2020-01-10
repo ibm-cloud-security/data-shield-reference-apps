@@ -31,4 +31,4 @@ cat ./../deployments/cloud-fund-environment-secrets_temp.yml |  yq '.data.dbconn
 | .data.frontend_url=env.FRONTEND_URL | .data.kp_instance_id=env.KP_INSTANCE_ID | .data.crk_id=env.CRK_ID | .data.API_KEY=env.API_KEY
 | .data.app_id_credentials=env.APP_ID_CONFIG | .data.app_id_sign_in=env.APP_ID_SIGN_UP_URL | .data.kms_url_secret=env.KMS_URL_SECRET | .data.cert_pem=env.certpem' -y > ./../deployments/cloud-fund-environment-secrets.yml
 
-cat ./../deployments/cloud-fund-ingress_temp.yml |  yq '.spec.rules[0].host=env.CLUSTER_INGRESS | .spec.tls[0].hosts[0]=env.CLUSTER_INGRESS  | .spec.tls[0].secretName=env.CLUSTER_NAME' -y > ./../deployments/cloud-fund-ingress.yml
+cat ./../deployments/cloud-fund-ingress_temp.yml |  yq '.spec.rules[0].host=env.CLUSTER_INGRESS | .spec.tls[0].hosts[0]=env.CLUSTER_INGRESS  | .spec.tls[0].secretName=env.CLUSTER_INGRESS_SECRET' -y > ./../deployments/cloud-fund-ingress.yml

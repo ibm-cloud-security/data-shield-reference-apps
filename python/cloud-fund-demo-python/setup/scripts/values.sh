@@ -9,7 +9,8 @@ export CLUSTER_API_KEY="${ACCOUNT_API_KEY}"
 export CLUSTER_RESOURCE_GROUP=''
 export CLUSTER_REGION=''
 export CLUSTER_NAME=''
-export CLUSTER_INGRESS="cloud-fund.${CLUSTER_NAME}.${CLUSTER_REGION}.containers.appdomain.cloud"
+export CLUSTER_INGRESS_SECRET=''
+export CLUSTER_INGRESS="cloud-fund.${CLUSTER_INGRESS_SECRET}.${CLUSTER_REGION}.containers.appdomain.cloud"
 
 # Key Protect values
 export KEY_PROTECT_INSTANCE=""
