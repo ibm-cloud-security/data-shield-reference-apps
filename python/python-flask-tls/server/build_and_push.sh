@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-ibmcloud cr image-rm ${CONTAINER_REGISTRY_PATH}/python-flask-server
-docker build -t ${CONTAINER_REGISTRY_PATH}/python-flask-server .
-docker push ${CONTAINER_REGISTRY_PATH}/python-flask-server
+ibmcloud cr image-rm $registry/python-flask-server
+docker build -t $registry/python-flask-server .
+docker push $registry/python-flask-server

@@ -1,6 +1,7 @@
 import requests 
 import logging
 from flask import Flask
+from flask import request
 app = Flask(__name__)
 
 logger = logging.getLogger('python_tls_app')
@@ -15,37 +16,18 @@ ch.setFormatter(formatter)
 logger.addHandler(fh)
 logger.addHandler(ch)
 
-@app.route("/")
-def hello():
-    return "Hello World"
+@app.route("/request", methods=['GET', 'POST'])
+def request_token():
+    URL = "https://python-flask-server-service-sgx:5002/token"
 
-@app.route("/hellorequest")
-def hello_request():
-    URL = "https://169.61.236.229:32700/"
-
-    output = ""
-    try:
-        # r = requests.post(url = URL, json = data, verify='/usr/local/share/ca-certificates/enclave-manager-ca.crt', cert=("flask-client.crt", "flask-client.key"))
-        # r = requests.get(url = URL, verify='/usr/local/share/ca-certificates/enclave-manager-ca.crt', cert=("client.crt", "client.key"))
-        r = requests.get(url = URL, verify='/usr/local/share/ca-certificates/em-ca.crt', cert=("flask-client.crt", "flask-client.key"))
-        output = r.content
-    except Exception as e:
-        logger.error(e)
-    return output
-
-@app.route("/request")
-def request():
-    # URL = "https://python-flask-server-service-sgx:5002/token"
-    URL = "https://169.61.236.229:32700/token"
-    
-    data = {'name':'test_name'}
+    if request.method == 'GET':
+        data = {'name':'test_name'}
+    else:
+        data = {'name': request.get_json()['name']}
 
     output = ""
     try:
-        # r = requests.post(url = URL, json = data, verify='/usr/local/share/ca-certificates/enclave-manager-ca.crt', cert=("flask-client.crt", "flask-client.key"))
-        # r = requests.post(url = URL, json = data, verify='/usr/local/share/ca-certificates/enclave-manager-ca.crt', cert=("client.crt", "client.key"))
-        # r = requests.post(url = URL, json = data, cert=("flask-client.crt", "flask-client.key"))
-        r = requests.post(url = URL, json = data, verify='/usr/local/share/ca-certificates/em-ca.crt', cert=("flask-client.crt", "flask-client.key"))
+        r = requests.post(url = URL, json = data, verify='/etc/ssl/certs/ca-certificates.crt', cert=("flask-client.crt", "flask-client.key"))
         output = r.content
     except Exception as e:
         logger.error(e)

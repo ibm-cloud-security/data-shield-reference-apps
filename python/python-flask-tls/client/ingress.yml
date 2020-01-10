@@ -6,7 +6,7 @@ metadata:
     ingress.bluemix.net/redirect-to-https: 'True'
 spec:
   rules:
-  - host: client.data-shield-ga-test.us-south.containers.appdomain.cloud
+  - host: client.<your cluster name>.us-south.containers.appdomain.cloud
     http:
       paths:
       - backend:
@@ -19,5 +19,5 @@ spec:
         path: /flaskpost
   tls:
   - hosts:
-    - client.data-shield-ga-test.us-south.containers.appdomain.cloud
-    secretName: data-shield-ga-test
+    - client.<your cluster name>.us-south.containers.appdomain.cloud
+    secretName: <your cluster name>
