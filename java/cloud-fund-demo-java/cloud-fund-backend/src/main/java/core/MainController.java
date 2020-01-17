@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +32,7 @@ import utils.Constants;
 @RequestMapping(path="/") // This means URL's start with /demo (after Application path)
 public class MainController {
 	
-	private static Logger LOGGER = Logger.getLogger(MainController.class.getName());
+	private static Logger LOGGER = LogManager.getLogger(MainController.class.getName());
 	Gson gson = new Gson();
 
 	@Autowired 

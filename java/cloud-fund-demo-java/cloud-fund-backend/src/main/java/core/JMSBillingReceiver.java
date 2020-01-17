@@ -4,7 +4,8 @@ import java.util.Optional;
 
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import utils.Constants;
 @Component
 public class JMSBillingReceiver {
 	
-	private static Logger LOGGER = Logger.getLogger(JMSBillingReceiver.class.getName());
+	private static Logger LOGGER = LogManager.getLogger(JMSBillingReceiver.class.getName());
 	
 	@Autowired 
 	private TransactionRepository transactionRepository;
