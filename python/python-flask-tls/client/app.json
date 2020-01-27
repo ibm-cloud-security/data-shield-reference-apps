@@ -1,0 +1,24 @@
+{
+    "name": "python-flask-client",
+    "description": "",
+    "input_image_name": "<your registry path>/python-flask-client",
+    "output_image_name": "<your registry path>/python-flask-client-sgx",
+    "isvprodid": 2,
+    "isvsvn": 1,
+    "memsize": 2048,
+    "threads": 128,
+    "allowed_domains": ["python-flask-client-service-sgx"],
+    "advanced_settings": {
+        "certificate": {
+                "issuer": "MANAGER_CA",
+                "keyType": "RSA",
+                "keyParam": {
+                  "size": 2048
+                },
+                "subject": "python-flask-client-service-sgx",
+                "keyPath": "/app/flask-client.key",
+                "certPath": "/app/flask-client.crt",
+                "caCertPath": "/app/ca.pem"
+    }
+  }
+}
