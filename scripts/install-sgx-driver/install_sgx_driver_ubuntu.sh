@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 function check_driver {
     if [[ ! -e /sys/module/isgx/version ]] ; then
@@ -16,14 +15,15 @@ function check_driver {
 
 function install_sgx_driver {
     if [[ $install_driver == true ]] ; then
+        sudo apt-get update
+        sudo apt-get install -y git
+        sudo apt-get install -y build-essential
+        sudo apt-get install -y linux-headers-$(uname -r)
+
         cd $(mktemp -d)
         rm -rf linux-sgx-driver
         git clone https://github.com/intel/linux-sgx-driver 
-
         cd linux-sgx-driver/
-        sudo apt-get update
-        sudo apt-get install -y build-essential
-        sudo apt-get install -y linux-headers-$(uname -r)
         make 
 
         sudo mkdir -p "/lib/modules/"`uname -r`"/kernel/drivers/intel/sgx"    

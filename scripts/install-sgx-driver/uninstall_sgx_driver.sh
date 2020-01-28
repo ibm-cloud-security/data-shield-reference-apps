@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 function check_driver {
     if [[ ! -e /sys/module/isgx/version ]] ; then
@@ -14,7 +13,7 @@ function uninstall_sgx_driver {
     sudo rm -rf "/lib/modules/"`uname -r`"/kernel/drivers/intel/sgx"
     sudo /sbin/depmod
     sudo /bin/sed -i '/^isgx$/d' /etc/modules
-    
+
     ls /dev/isgx >/dev/null 2>1  && echo "SGX driver uninstall failed" || echo "SGX driver uninstalled"
 }
 
