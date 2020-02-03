@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    name: sgx-driver-installer
+  name: sgx-driver-installer
+spec:
+  template:
+    metadata:
+      labels:
+        name: sgx-driver-installer
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+      - image: us.icr.io/datashield-core/sgx-driver-installer
+        securityContext:
+          privileged: true
+        name: sgx-driver-installer
+        volumeMounts:
+        - mountPath: /host
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+          # directory location on host
+          path: /
