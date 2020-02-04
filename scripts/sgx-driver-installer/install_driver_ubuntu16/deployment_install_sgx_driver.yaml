@@ -1,23 +1,26 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    name: sgx-driver-uninstaller
-  name: sgx-driver-uninstaller
+    name: sgx-driver-installer
+  name: sgx-driver-installer
 spec:
+  selector:
+    matchLabels:
+      name: sgx-driver-installer
   template:
     metadata:
       labels:
-        name: sgx-driver-uninstaller
+        name: sgx-driver-installer
     spec:
       hostNetwork: true
       hostPID: true
       hostIPC: true
       containers:
-      - image: us.icr.io/datashield-core/sgx-driver-uninstaller
+      - image: us.icr.io/datashield-core/sgx-driver-installer
         securityContext:
           privileged: true
-        name: sgx-driver-uninstaller
+        name: sgx-driver-installer
         volumeMounts:
         - mountPath: /host
           name: test-volume

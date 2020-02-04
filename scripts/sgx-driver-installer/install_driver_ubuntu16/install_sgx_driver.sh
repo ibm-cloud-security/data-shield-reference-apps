@@ -16,27 +16,17 @@ function check_driver {
 function install_sgx_driver {
     if [[ $install_driver == true ]] ; then
         sudo apt-get update
-        sudo apt-get install -y git
         sudo apt-get install -y build-essential
         sudo apt-get install -y linux-headers-$(uname -r)
 
-        cd $(mktemp -d)
-        rm -rf linux-sgx-driver
-        git clone https://github.com/intel/linux-sgx-driver 
-        cd linux-sgx-driver/
-        make 
-
-        sudo mkdir -p "/lib/modules/"`uname -r`"/kernel/drivers/intel/sgx"    
-        sudo cp -f isgx.ko "/lib/modules/"`uname -r`"/kernel/drivers/intel/sgx"    
-        sudo sh -c "cat /etc/modules | grep -Fxq isgx || echo isgx >> /etc/modules"    
-        sudo /sbin/depmod
-        sudo /sbin/modprobe isgx
-
-        cd ..
+        wget https://download.01.org/intel-sgx/sgx-linux/2.8/distro/ubuntu16.04-server/sgx_linux_x64_driver_2.6.0_51c4821.bin
+        chmod +x sgx_linux_x64_driver_2.6.0_51c4821.bin
+        ./sgx_linux_x64_driver_2.6.0_51c4821.bin
 
         ls /dev/isgx >/dev/null 2>1  && echo "SGX driver installed" || echo "SGX driver installation failed"
     fi
 }
 
-check_driver
+#check_driver
+install_driver=true
 install_sgx_driver

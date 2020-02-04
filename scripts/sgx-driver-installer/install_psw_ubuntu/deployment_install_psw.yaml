@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    name: psw-installer
+  name: psw-installer
+spec:
+  selector:
+    matchLabels:
+      name: psw-installer
+  template:
+    metadata:
+      labels:
+        name: psw-installer
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+      - image: us.icr.io/datashield-core/psw-installer
+        securityContext:
+          privileged: true
+        name: psw-installer
+        volumeMounts:
+        - mountPath: /host
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+          # directory location on host
+          path: /

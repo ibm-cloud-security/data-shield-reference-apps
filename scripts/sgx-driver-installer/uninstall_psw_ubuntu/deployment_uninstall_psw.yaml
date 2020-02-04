@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    name: psw-uninstaller
+  name: psw-uninstaller
+spec:
+  selector:
+    matchLabels:
+      name: psw-uninstaller
+  template:
+    metadata:
+      labels:
+        name: psw-uninstaller
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+      - image: us.icr.io/datashield-core/psw-uninstaller
+        securityContext:
+          privileged: true
+        name: psw-uninstaller
+        volumeMounts:
+        - mountPath: /host
+          name: test-volume
+      volumes:
+      - name: test-volume
+        hostPath:
+          # directory location on host
+          path: /

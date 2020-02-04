@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
     name: sgx-driver-installer
   name: sgx-driver-installer
 spec:
+  selector:
+    matchLabels:
+      name: sgx-driver-installer
   template:
     metadata:
       labels:
