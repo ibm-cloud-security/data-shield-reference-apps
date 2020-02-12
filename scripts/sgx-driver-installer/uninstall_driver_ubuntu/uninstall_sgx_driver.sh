@@ -18,8 +18,17 @@ function uninstall_sgx_driver {
         sudo /bin/sed -i '/^isgx$/d' /etc/modules
     fi
 
-    ls /dev/isgx >/dev/null 2>1  && echo "SGX driver uninstall failed" || echo "SGX driver uninstalled"
+    ls /dev/isgx >/dev/null 2>1 && echo "SGX driver uninstall failed" || echo "SGX driver uninstalled"
+}
+
+function uninstall_psw {
+    cd /
+    sudo apt-get remove *sgx* -y
+    cd -
+
+    echo "PSW uninstalled"
 }
 
 check_driver
 uninstall_sgx_driver
+uninstall_psw
