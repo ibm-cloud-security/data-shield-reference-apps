@@ -1,0 +1,4 @@
+You have uninstalled the Intel SGX drivers and PSW.
+
+Your release is named {{ .Release.Name }}.
+

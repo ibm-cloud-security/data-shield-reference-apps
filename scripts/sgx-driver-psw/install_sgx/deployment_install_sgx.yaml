@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    name: sgx-installer
+  name: sgx-installer
+spec:
+  selector:
+    matchLabels:
+      name: sgx-installer
+  template:
+    metadata:
+      labels:
+        name: sgx-installer
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+      - image: us.icr.io/datashield-core/sgx-installer
+        securityContext:
+          privileged: true
+        name: sgx-installer
+        volumeMounts:
+        - mountPath: /host
+          name: test-volume
+      nodeSelector:
+        ibm-cloud.kubernetes.io/sgx-enabled: "true"
+      serviceAccount: sgx-admin
+      volumes:
+      - name: test-volume
+        hostPath:
+          # directory location on host
+          path: /
