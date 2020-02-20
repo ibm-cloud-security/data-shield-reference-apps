@@ -2,30 +2,31 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   labels:
-    name: sgx-driver-uninstaller
-  name: sgx-driver-uninstaller
+    name: sgx-uninstaller
+  name: sgx-uninstaller
 spec:
   selector:
     matchLabels:
-      name: sgx-driver-uninstaller
+      name: sgx-uninstaller
   template:
     metadata:
       labels:
-        name: sgx-driver-uninstaller
+        name: sgx-uninstaller
     spec:
       hostNetwork: true
       hostPID: true
       hostIPC: true
       containers:
-      - image: us.icr.io/datashield-core/sgx-driver-uninstaller
+      - image: us.icr.io/datashield-core/sgx-uninstaller
         securityContext:
           privileged: true
-        name: sgx-driver-uninstaller
+        name: sgx-uninstaller
         volumeMounts:
         - mountPath: /host
           name: test-volume
       nodeSelector:
         ibm-cloud.kubernetes.io/sgx-enabled: "true"
+      serviceAccount: sgx-admin
       volumes:
       - name: test-volume
         hostPath:

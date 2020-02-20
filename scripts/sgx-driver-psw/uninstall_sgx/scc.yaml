@@ -1,0 +1,25 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: sgx-admin
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegedContainer: true
+allowedCapabilities: ["*"]
+seccompProfiles: ["*"]
+volumes: ["*"]
+users:
+- sgx-admin-user
+groups:
+- sgx-admin-group
