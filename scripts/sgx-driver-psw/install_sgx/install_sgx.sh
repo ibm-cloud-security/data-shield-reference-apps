@@ -2,7 +2,6 @@
 
 function install_sgx_driver  {
     os=$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)
-    echo $os
     if [[ $os =~ "Ubuntu 18" ]]; then
         sudo apt-get update
         sudo apt-get install -y build-essential
@@ -28,6 +27,7 @@ function install_sgx_driver  {
 
 function install_psw {
     os=$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)
+    echo $os
     if [[ $os =~ "Ubuntu" ]]; then
         # Install tools
         sudo apt-get install -y libssl-dev libcurl4-openssl-dev libprotobuf-dev
@@ -35,17 +35,31 @@ function install_psw {
         # Install PSW 
         if [[ $os =~ "Ubuntu 18" ]]; then
             echo 'deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu bionic main' | sudo tee /etc/apt/sources.list.d/intel-sgx.list
+            wget -qO - https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
         elif [[ $os =~ "Ubuntu 16" ]]; then
             echo 'deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu xenial main' | sudo tee /etc/apt/sources.list.d/intelsgx.list
+            wget -qO - https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
         fi
-        wget -qO - https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
+
         sudo apt-get update -y
         sudo apt-get install -y libsgx-launch libsgx-urts
         sudo apt-get install -y libsgx-epid libsgx-urts
         sudo apt-get install -y libsgx-quote-ex libsgx-urts
-        
+
+        echo "PSW installed"
+
+    elif [[ $os =~ "Red Hat" ]]; then
+        yum install -y openssl-devel libcurl-devel protobufdevel yum-utils
+        wget https://download.01.org/intel-sgx/latest/linux-latest/distro/rhel7.4-server/sgx_rpm_local_repo.tgz
+        tar -xvf sgx_rpm_local_repo.tgz
+        yum-config-manager --add-repo file:///sgx_rpm_local_repo
+        yum --nogpgcheck install libsgx-launch libsgx-urts
+        yum --nogpgcheck install libsgx-epid libsgx-urts
+        yum --nogpgcheck install libsgx-quote-ex libsgx-urts
+
         echo "PSW installed"
     fi
+
 }
 
 install_sgx_driver

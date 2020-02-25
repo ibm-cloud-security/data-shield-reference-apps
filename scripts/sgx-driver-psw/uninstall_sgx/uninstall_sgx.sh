@@ -7,7 +7,20 @@ function check_driver {
     fi
 }
 
-function uninstall_sgx_driver {
+function uninstall {
+    # Uninstall PSW
+    os=$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)
+    if [[ $os =~ "Ubuntu" ]]; then
+        cd /
+        sudo apt-get remove *sgx* -y
+        cd -
+    elif [[ $os =~ "Red Hat" ]]; then
+        yum remove *sgx*
+    fi
+
+    echo "PSW uninstalled"
+
+    # Uninstall SGX driver
     if [ -f "./opt/intel/sgxdriver/uninstall.sh" ]; then
         bash /opt/intel/sgxdriver/uninstall.sh 
     else
@@ -21,14 +34,5 @@ function uninstall_sgx_driver {
     ls /dev/isgx >/dev/null 2>1 && echo "SGX driver uninstall failed" || echo "SGX driver uninstalled"
 }
 
-function uninstall_psw {
-    cd /
-    sudo apt-get remove *sgx* -y
-    cd -
-
-    echo "PSW uninstalled"
-}
-
 check_driver
-uninstall_sgx_driver
-uninstall_psw
+uninstall
