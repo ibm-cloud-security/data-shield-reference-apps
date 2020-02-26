@@ -27,7 +27,6 @@ function install_sgx_driver  {
 
 function install_psw {
     os=$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)
-    echo $os
     if [[ $os =~ "Ubuntu" ]]; then
         # Install tools
         sudo apt-get install -y libssl-dev libcurl4-openssl-dev libprotobuf-dev
