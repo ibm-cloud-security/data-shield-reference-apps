@@ -1,4 +1,10 @@
-# SGX Driver and PSW Installer
+# Intel SGX Driver and PSW Installer
+These scripts install the Intel SGX driver and the Intel SGX Platform Software on SGX-enabled systems. 
+
+The following operating systems are supported:
+* Ubuntu 16.04.3
+* Ubuntu 18.04
+* Red Hat Enterprise Linux Server release 7.4
 
 ## Install on bare metal server
 ```
