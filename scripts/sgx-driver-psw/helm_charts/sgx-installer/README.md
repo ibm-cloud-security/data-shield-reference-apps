@@ -20,9 +20,8 @@
 ## Installing the chart
 
 ```
-helm install sgx-installer ./sgx-installer-ubuntu
+helm install sgx-installer .
 ```
-helm install sgx-uninstaller ./sgx-uninstaller-ubuntu
 
 
 ### Verifying the chart
@@ -36,7 +35,6 @@ helm uninstall sgx-installer
 ```
 
 To remove the SGX drivers and PSW from your machine, install the SGX uninstaller Helm chart.
-helm uninstall sgx-uninstaller 
 
 
 ## Documentation
