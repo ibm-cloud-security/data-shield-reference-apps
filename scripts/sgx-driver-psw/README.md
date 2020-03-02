@@ -27,6 +27,11 @@ kubectl delete daemonset sgx-installer
 ```
 
 ## Install on OpenShift clusters
+Create a privileged security context constraint and a service account
+```
+curl -fssl https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/config_openshift/create_openshift_config.sh | bash
+```
+
 Create a daemonset that installs the SGX drivers and the PSW
 ```
 curl -fssl https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/config_openshift/create_openshift_config.sh | bash
@@ -36,8 +41,14 @@ You can remove the installer after it has finished running
 oc delete daemonset sgx-installer
 ```
 
+You can also delete the security context constraint and service account created
+```
+oc delete scc sgx-admin
+oc delete serviceaccount sgx-admin
+```
+
 ## Uninstall on IKS clusters
-Create a daemonset that installs the SGX drivers and the PSW
+Create a daemonset that uninstalls the SGX drivers and the PSW
 ```
 kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/uninstall_sgx/deployment_uninstall_sgx_iks.yaml
 ```
@@ -52,7 +63,7 @@ Create a privileged security context constraint and a service account
 ```
 curl -fssl https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/config_openshift/create_openshift_config.sh | bash
 ```
-Create a daemonset that installs the SGX drivers and the PSW
+Create a daemonset that uninstalls the SGX drivers and the PSW
 ```
 oc create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/uninstall_sgx/deployment_uninstall_sgx_openshift.yaml
 ```

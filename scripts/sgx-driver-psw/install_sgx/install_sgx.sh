@@ -26,6 +26,7 @@ function install_sgx_driver  {
 }
 
 function install_psw {
+    psw_installed=false
     os=$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)
     if [[ $os =~ "Ubuntu" ]]; then
         # Install tools
@@ -45,7 +46,7 @@ function install_psw {
         sudo apt-get install -y libsgx-epid libsgx-urts
         sudo apt-get install -y libsgx-quote-ex libsgx-urts
 
-        echo "PSW installed"
+        psw_installed=true
 
     elif [[ $os =~ "Red Hat" ]]; then
         yum install -y openssl-devel libcurl-devel protobufdevel yum-utils
@@ -56,10 +57,19 @@ function install_psw {
         yum --nogpgcheck install libsgx-epid libsgx-urts
         yum --nogpgcheck install libsgx-quote-ex libsgx-urts
 
-        echo "PSW installed"
+        psw_installed=true
     fi
 
 }
 
+function check_install {
+    ls /dev/isgx >/dev/null 2>1  && echo "SGX driver installed" || echo "SGX driver NOT installed"
+    if [[ "$psw_installed" = true ]]; then
+        echo "PSW installed"
+    fi
+}
+
 install_sgx_driver
 install_psw
+check_install
+
