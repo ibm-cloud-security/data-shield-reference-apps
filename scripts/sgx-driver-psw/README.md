@@ -34,7 +34,7 @@ curl -fssl https://raw.githubusercontent.com/ibm-cloud-security/data-shield-refe
 
 Create a daemonset that installs the SGX drivers and the PSW
 ```
-curl -fssl https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/config_openshift/create_openshift_config.sh | bash
+oc create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/install_sgx/deployment_install_sgx_openshift.yaml
 ```
 You can remove the installer after it has finished running
 ```

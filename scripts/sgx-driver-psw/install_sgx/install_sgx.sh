@@ -50,12 +50,13 @@ function install_psw {
 
     elif [[ $os =~ "Red Hat" ]]; then
         yum install -y openssl-devel libcurl-devel protobufdevel yum-utils
+        cd /
         wget https://download.01.org/intel-sgx/latest/linux-latest/distro/rhel7.4-server/sgx_rpm_local_repo.tgz
         tar -xvf sgx_rpm_local_repo.tgz
         yum-config-manager --add-repo file:///sgx_rpm_local_repo
-        yum --nogpgcheck install libsgx-launch libsgx-urts
-        yum --nogpgcheck install libsgx-epid libsgx-urts
-        yum --nogpgcheck install libsgx-quote-ex libsgx-urts
+        yum --nogpgcheck install -y libsgx-launch libsgx-urts
+        yum --nogpgcheck install -y libsgx-epid libsgx-urts
+        yum --nogpgcheck install -y libsgx-quote-ex libsgx-urts
 
         psw_installed=true
     fi
