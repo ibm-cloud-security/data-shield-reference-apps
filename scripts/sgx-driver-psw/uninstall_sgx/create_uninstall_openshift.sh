@@ -2,8 +2,8 @@
 
 bash cleanup_openshift.sh
 
-docker build -t us.icr.io/datashield-core/sgx-uninstaller . 
-docker push us.icr.io/datashield-core/sgx-uninstaller
+docker build -t icr.io/ibm/ibm-sgx-uninstaller . 
+docker push icr.io/ibm/ibm-sgx-uninstaller
 oc create -f scc.yaml
 oc create serviceaccount sgx-admin
 oc secrets add serviceaccount/sgx-admin secrets/default-icr-io --for=pull

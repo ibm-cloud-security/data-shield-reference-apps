@@ -17,7 +17,7 @@ spec:
       hostPID: true
       hostIPC: true
       containers:
-      - image: us.icr.io/datashield-core/sgx-uninstaller
+      - image: icr.io/ibm/ibm-sgx-uninstaller
         securityContext:
           privileged: true
         name: sgx-uninstaller
