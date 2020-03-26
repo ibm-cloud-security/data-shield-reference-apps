@@ -1,0 +1,8 @@
+FROM python:3.8-alpine
+RUN apk add --update py-pip
+RUN apk add curl
+COPY . /app
+WORKDIR /app
+RUN pip3 install -r requirements-istio.txt
+ENTRYPOINT ["python"]
+CMD ["client-istio.py"]
