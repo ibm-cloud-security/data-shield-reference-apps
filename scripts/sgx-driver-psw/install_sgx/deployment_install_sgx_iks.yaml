@@ -17,7 +17,7 @@ spec:
       hostPID: true
       hostIPC: true
       containers:
-      - image: icr.io/ibm/ibm-sgx-installer 
+      - image: icr.io/ibm/ibm-sgx-installer
         securityContext:
           privileged: true
         name: sgx-installer

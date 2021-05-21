@@ -6,23 +6,25 @@ function install_sgx_driver  {
         sudo apt-get update
         sudo apt-get install -y build-essential
         sudo apt-get install -y linux-headers-$(uname -r)
+        sudo apt-get install kmod
 
-        wget https://download.01.org/intel-sgx/sgx-linux/2.8/distro/ubuntu18.04-server/sgx_linux_x64_driver_2.6.0_51c4821.bin
+        wget https://download.01.org/intel-sgx/sgx-linux/2.13.3/distro/ubuntu18.04-server/sgx_linux_x64_driver_2.11.0_2d2b795.bin
     elif [[ $os =~ "Ubuntu 16" ]]; then
         sudo apt-get update
         sudo apt-get install -y build-essential
         sudo apt-get install -y linux-headers-$(uname -r)
 
-        wget https://download.01.org/intel-sgx/sgx-linux/2.8/distro/ubuntu16.04-server/sgx_linux_x64_driver_2.6.0_51c4821.bin
+        wget https://download.01.org/intel-sgx/sgx-linux/2.13.3/distro/ubuntu16.04-server/sgx_linux_x64_driver_2.11.0_2d2b795.bin
     elif [[ $os =~ "Red Hat" ]]; then
         sudo yum install -y kernel-devel
-        wget https://download.01.org/intel-sgx/sgx-linux/2.8/distro/rhel7.4-server/sgx_linux_x64_driver_2.6.0_51c4821.bin
+        sudo yum install -y gcc
+        wget https://download.01.org/intel-sgx/sgx-linux/2.13.3/distro/rhel7.6-server/sgx_linux_x64_driver_2.11.0_2d2b795.bin
     else
         echo "$os is not supported."
         exit 1
     fi
 
-    bash sgx_linux_x64_driver_2.6.0_51c4821.bin
+    bash sgx_linux_x64_driver_2.11.0_2d2b795.bin
 }
 
 function install_psw {
@@ -51,7 +53,7 @@ function install_psw {
     elif [[ $os =~ "Red Hat" ]]; then
         yum install -y openssl-devel libcurl-devel protobufdevel yum-utils
         cd /
-        wget https://download.01.org/intel-sgx/latest/linux-latest/distro/rhel7.4-server/sgx_rpm_local_repo.tgz
+        wget https://download.01.org/intel-sgx/sgx-linux/2.13.3/distro/rhel7.6-server/sgx_rpm_local_repo.tgz
         tar -xvf sgx_rpm_local_repo.tgz
         yum-config-manager --add-repo file:///sgx_rpm_local_repo
         yum --nogpgcheck install -y libsgx-launch libsgx-urts

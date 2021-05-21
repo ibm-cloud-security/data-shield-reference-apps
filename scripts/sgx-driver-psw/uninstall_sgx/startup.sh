@@ -1,9 +1,6 @@
 #!/bin/bash
-sed -i 's/PermitRootLogin.*/PermitRootLogin yes/g' /host/etc/ssh/sshd_config && killall -1 sshd
-sleep 5;
-ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
-cat /root/.ssh/id_rsa.pub >> /host/root/.ssh/authorized_keys
-ssh -oStrictHostKeyChecking=no -tt localhost < uninstall_sgx.sh
+wget https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/uninstall_sgx/uninstall_sgx.sh --no-check-certificate
+chroot /host bash < uninstall_sgx.sh
 while true; do
   sleep 1000
 done
