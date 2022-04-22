@@ -17,7 +17,7 @@
     "helmet": "^3.15.0",
     "ibmcloud-appid": "^5.0.0",
     "morgan": "^1.9.1",
-    "nconf": "^0.10.0",
+    "nconf": "^0.11.4",
     "passport": "^0.4.0",
     "path": "^0.12.7"
   },
